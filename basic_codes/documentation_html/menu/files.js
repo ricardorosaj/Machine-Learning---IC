@@ -1,0 +1,1 @@
+﻿NDMenu.OnSectionLoaded("files.js",[[1,"1-tpm_data_from_tissues.py"],[1,"2-filter_genes_from_log2_expression_data.py"],[1,"3-gtex_samples_into_quartiles-run_pca-plot.py"],[1,"4-plot_of_gene_expression_by_quartile.py"],[1,"5-erase_samples_from_quartiles.py"],[1,"6-apply_decision_tree_gtex.py"]]);
