@@ -8,9 +8,15 @@ Erases samples from quartiles of time of death that will not be used as input to
 
 """
 Function: erase_quartiles_and_fix_cols_names
+ 
+ Description:
+    As a final preparation step to run the Decision Tree algorithm, this function erases the samples that are 
+    within 24h of the time of death for the extraction of the sample from the patient.
+ 
  Parameters:
  	df - dataframe with expression of genes
  	quartiles - list of quartiles that you wish to exclude. Example: [0,1] (starts from 0)
+ 
  Returns:
  	Dataframe transformed with time of death of all samples and the quartile of time of death of each sample
 """

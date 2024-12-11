@@ -13,6 +13,7 @@ Applies PCA or tSNE on expression data (for necrop, protein coding or all genes)
 """
 
 def transform_data(df):
+    # Save data in readable format
     df.columns=df.iloc[0]
     df = df[1:]
     df = df.reset_index()
@@ -23,16 +24,22 @@ def transform_data(df):
     return df
 
 def transform_data_pca(df, pca_model):
+    # Apply transformation of PCA to data and get information on the PCA
     pca_list = []
     list_index = []
     for i in range(len(df)):
         line = df.iloc[i]
         pca_list.append(pca_model.transform([line])[0])
-        list_index.append(line.name) #saves names of genes for indexing with quarties and zscores
+        list_index.append(line.name) # Saves names of genes for indexing with quartiles and zscores
     return pd.DataFrame(np.array(pca_list),index=list_index)
 
 """
 Function: create_df_for_method_with_time_of_death_and_applies_it
+
+ Description: 
+    This function applies PCA or tSNE techniques to redimension data to be visualized. 
+    It's part of the analysis of the effect of necroptosis genes in the expression data.
+
  Parameters:
  	df - dataframe with expression of genes
     method - string with values 'pca' or 'tsne' for dimensionality reduction
@@ -85,6 +92,10 @@ def create_df_for_method_with_time_of_death_and_applies_it(df, method):
 
 """
 Function: plot_df_transformed
+
+Description: 
+    This function simply plots the data generated in the previous function.
+
  Parameters:
  	quartile - dataframe created by 'create_df_for_method_with_time_of_death_and_applies_it' function
     method - string with values 'pca' or 'tsne'

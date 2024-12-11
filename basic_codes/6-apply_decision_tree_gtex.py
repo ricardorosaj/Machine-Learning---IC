@@ -40,6 +40,10 @@ def change_position_randomly(condition):
 
 """
 Function: create_x_y_from_data_frame
+
+ Description:
+    This function creates the x and y for decision tree algorithm with decoder of positions to name and vice-versa.
+
  Parameters:
  	df - dataframe with expression data and classes of samples.
  	
@@ -47,7 +51,7 @@ Function: create_x_y_from_data_frame
  	Dictionary with x and y values to use as input of algorithm and decoders linking positions of values in list and vice-versa. 
 """
 def create_x_y_from_data_frame(df):
-    """Creates the x and y for decision tree algorithm with decoder of positions to name and vice-versa"""
+    
     x = df[df.columns[:-1]] #Values of expression excluding the last column, containing the conditions (targets) 
     x_copy = np.array(x)
     y = df['Pacient_Condition'] #Targets
@@ -144,7 +148,7 @@ db = sqlite3.connect(util.path__+'../../../../data/interim/sql/bd_ic_v2.sqlite3'
 cur = db.cursor()
 
 exper = "Teste"
-cur.execute(f"""INSERT INTO experiencia (description) VALUES ("Teste");""") #Initiate an experiment
+cur.execute(f"""INSERT INTO experiencia (description) VALUES ({exper});""") #Initiate an experiment
 exp = cur.lastrowid
 db.commit()
 

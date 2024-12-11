@@ -13,7 +13,8 @@ Code for filtering samples from specified tissue and normalizing tpm data to log
 """
 Function: create_log2tpm_for_tissue_from_gtex
 
-Description: Reads which samples are from specified tissue and filter them, creating a dataframe with normalized tpm expression.
+Description: 
+    Reads which samples are from specified tissue and filter them, creating a dataframe with normalized tpm expression.
 
 Parameters: 
 	tissue - Specific tissue from GTEx data (needs to be exactly written like on GTEx)
@@ -25,12 +26,14 @@ Returns:
 
 def create_log2tpm_for_tissue_from_gtex(tissue):
     """Creates a dataframe of the expression, in log2tpm, of genes from samples from specified tissue"""
+    # This first file is a supporting file with information to use and select the correct samples
     df = pd.read_csv(util.path__+'../../../data/raw/gtex/GTEx_Analysis_v8_Annotations_SampleAttributesDS.txt'.replace('/',os.sep), usecols=['SAMPID', 'SMTSD'], sep='\t') #File with id and tissue info
     list_tissue = []
     for i in range(len(df)):
         if df['SMTSD'][i]==tissue:
             list_tissue.append(df['SAMPID'][i])
     dict_for_list_tissue={'Gene_ID':[]}
+    # Read line by line of a large file (>20Gb) and save information in a dictionary
     with open(util.path__+'../../../data/raw/gtex/GTEx_Analysis_2017-06-05_v8_RNASeQCv1.1.9_gene_tpm.gct'.replace('/',os.sep),'r') as gct: #Open big file and separates the expression data
         read=csv.reader(gct,delimiter='\t')
         next(read)

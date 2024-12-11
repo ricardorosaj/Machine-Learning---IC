@@ -11,6 +11,7 @@ Plots the expression of genes from necroptosis pathway, by removing stable genes
 """
 
 def transform_data(df):
+    # Save data in readable format
     df.columns=df.iloc[0]
     df = df[1:]
     df = df.reset_index()
@@ -22,11 +23,16 @@ def transform_data(df):
 
 """
 Function: create_df_for_plot
+
+ Description: 
+    This function creates the dataframe for plotting time of death of each patient separated by quartile 
+
  Parameters:
  	df - dataframe with expression of genes
  	tissue - from which tissue the samples of df are
+
  Returns:
- 	Saves dataframe transformed with time of death of all samples and the quartile of time of death of each sample
+ 	Dataframe transformed with time of death of all samples and the quartile of time of death of each sample
 """
 
 def create_df_for_plot(df,tissue):
@@ -52,6 +58,11 @@ def create_df_for_plot(df,tissue):
 
 """
 Function: remove_stable_genes
+
+ Description: 
+    As we want to analyse genes that affect the expression of other by being present in the necroptosis pathway, this functions selects
+    only the genes that change its expression by varying the time of death of the patients.
+
  Parameters:
  	df - dataframe with expression of genes
  	
@@ -68,13 +79,17 @@ def remove_stable_genes(df):
     q3 = df[df['quartiles']==3].mean(axis=0).values[:-2]
     std = np.std(df)[:-2]
     for i in range(len(std)):
-        if abs(q0[i]-q3[i]) <= std[i]:
-            genes_to_drop.append(std.index.values[i])
+        if abs(q0[i]-q3[i]) <= std[i]: # Checks if the difference of the expression values of the genes in the first and 4th quartile is 
+            genes_to_drop.append(std.index.values[i]) # lower than the standard deviation of the expression value of this gene
     new_df = df.drop(genes_to_drop,axis=1)
     return new_df
 
 """
 Function: df_mean_exp_by_time_of_death
+
+ Description: 
+    This function calculates the mean expression of genes from a single patient for each quartile.
+ 
  Parameters:
  	df - dataframe with expression of genes
  	
@@ -99,6 +114,11 @@ def df_mean_exp_by_time_of_death(df):
 
 """
 Function: save_plot
+
+ Description:
+    This function plots, for each tissue that is being analysed, the scatter plot of the expression of genes
+    separated by quartile of the time of deat of each patient.
+
  Parameters:
  	df - dataframe with expression of genes
     tissue - values 'ventricle', 'atrial' or 'coronary'

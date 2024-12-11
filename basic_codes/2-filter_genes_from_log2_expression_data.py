@@ -10,6 +10,11 @@ Filter genes from necroptosis pathway or protein coding
 
 """
 Function: filter_genes
+
+ Description:
+    This function selects only the genes that will be further analysed on the next steps, being protein coding genes
+    and genes that are present in te necroptosis pathway.
+
  Parameters:
  	df - path for dataframe with expression of genes
     filter_by - filter by necroptosis or by protein coding (pc) genes
@@ -19,6 +24,7 @@ Function: filter_genes
 """
 
 def filter_genes(df, filter_by):
+    # "Protein coding genes" were previously selected as interesting genes to be analized
     if filter_by == 'pc':
         genes_to_filter = pd.read_csv(util.path__+'../../../data/external/genes_protein_conding.tsv'.replace('/',os.sep),sep='\t')
         genes_to_filter = genes_to_filter['Ensembl gene ID'].values
@@ -34,7 +40,8 @@ def filter_genes(df, filter_by):
                     for i in range(len(line)):
                         if line[0].split('.')[0] in genes_to_filter:
                             dict_df[tissue[i]].append(line[i])
-        return dict_df                     
+        return dict_df                    
+    # "Necroptosis genes" are genes that are part of the death of the cell pathway and could affect expression of other genes 
     elif filter_by == 'necrop':
         genes_to_filter = pd.read_csv(util.path__+'../../../data/external/genes_necroptose.csv'.replace('/',os.sep))
         genes_to_filter = genes_to_filter['x'].values
