@@ -1,48 +1,12 @@
 Ricardo Project - Machine Learning
 ==================================
 
-Project tree
-------------
-
-```
-├── analysis
-│   ├── code
-│   │   ├── data                        # Scripts to edit expression data
-│   │   ├── models
-│   │   │   ├── decision_tree_gtex      # Decision trees using GTEx data
-│   │   │   ├── decision_tree_iguaracy  # Decision trees using HCAEC data
-│   │   │   ├── kmeans_gtex             # Kmeans using GTEx data
-│   │   │   ├── kmeans_iguaracy         # Kmeans using HCAEC data
-│   │   │   └── pca_gtex                # PCA applied to GTEx data
-│   │   ├── sql                         # Scripts to modify or update SQL database
-│   │   └── viz                         # Scripts to visualize results 
-│   └── results                         # Printed results from trees, visualizers, etc
-│       ├── gtex_results
-│       └── iguaracy_results
-├── data
-│   └── external                        # External data
-├── interim                             # Intermediate data
-│   ├── gtex_data
-│   ├── iguaracy_data
-│   └── sql                             # Database created
-├── processed                           # Final data for input to algorithms
-│   ├── gtex_data
-│   └── iguaracy_data
-├── raw                                 # Raw data
-│   ├── gtex
-│   ├── iguaracy_data
-│   └── starnet
-├── docs                                # Documents necessary for the project
-│   └── papers                          # Papers read for project
-├── presentations                       # Presentations from meetings and congresses
-│   ├── Imagens e vídeos
-│   ├── Krieger Meetings
-│   ├── Lab meetings
-└── README.md
-
-```
+Project Aims
+-------------
 
 This project aims to identify genes whose pattern of gene expression is determinant to characterize different risk factors for endothelial dysfunction and development of atherosclerosis.
+The idea is to run multiple decision tree classifier to indentify genes whose expression is determinant for the previously selected and categorized risk factors and save the data generated from these classifiers in a SQL databse.
+With the data saved in the database, by running few selects, we can identify a "average tree", with the information of the most important genes to determine a singular risk factor, hence, genes to be further studied for cardiovascular diseases.
 
 The following image shows a short pipeline for working with GTEx data and applying it to decision trees algorithm. The necessary data for scripts to work are in the data/interim/gtex_data folder.
 
